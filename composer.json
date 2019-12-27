@@ -3,6 +3,7 @@
     "description": "Wordpress app which use composer",
     "type": "project",
     "license": "MIT",
+    "keywords": ["wordpress", "app", "composer", "modern", "development"],
     "authors": [
         {
             "name": "Roman Skoropadskyi",
@@ -32,6 +33,7 @@
         }
     ],
     "require": {
+        "php": "^7.1.3",
         "roots/wordpress": "^5.3",
         "symfony/dotenv": "^5.0"
     },
