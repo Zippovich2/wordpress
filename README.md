@@ -39,5 +39,5 @@ or
 4. Set the document root on your webserver to Bedrock's `public` folder: `/path/to/site/public/`
 5. Access WordPress admin at `https://example.com/wp/wp-admin/`
 
-You can skip 3,4,5 if you are using Docker, just run `make up` or `docker-compose up` then you can access you site by 
-following `https://localhost:8080`
+You can skip 3, 4, 5 if you are using Docker, just run `make up` or `docker-compose up` then you can access you site by 
+uri `http://localhost:8080`
