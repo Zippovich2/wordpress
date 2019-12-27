@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Kernel;
+namespace App;
 
 use Symfony\Component\Dotenv\Dotenv;
 
-class KernelLoader
+class WPLoader
 {
     private $dotenv;
 
@@ -15,8 +15,8 @@ class KernelLoader
 
     public function load(): void
     {
-        define('PROJECT_ROOT', dirname($_SERVER['DOCUMENT_ROOT']));
-        define('WEB_ROOT', $_SERVER['DOCUMENT_ROOT']);
+        $this->defineConstant('PROJECT_ROOT', dirname($_SERVER['DOCUMENT_ROOT']));
+        $this->defineConstant('WEB_ROOT', $_SERVER['DOCUMENT_ROOT']);
 
         $this->dotenv->loadEnv(PROJECT_ROOT . '/.env');
 
@@ -30,18 +30,16 @@ class KernelLoader
 
         $this->defineConstants($envVars);
 
-        if (!defined('WP_CONTENT_DIR')) define('WP_CONTENT_DIR', WEB_ROOT . $envVars['CONTENT_DIR']);
-        if (!defined('WP_CONTENT_URL')) define('WP_CONTENT_URL', $envVars['WP_HOME'] . $envVars['CONTENT_DIR']);
-        if (!defined('ABSPATH')) define('ABSPATH', WEB_ROOT . '/wp/');
+        $this->defineConstant('WP_CONTENT_DIR', WEB_ROOT . $envVars['CONTENT_DIR']);
+        $this->defineConstant('WP_CONTENT_URL', $envVars['WP_HOME'] . $envVars['CONTENT_DIR']);
+        $this->defineConstant('ABSPATH', WEB_ROOT . '/wp/');
     }
 
     private function defineConstants(array $vars): void
     {
         foreach ($vars as $key=>$value)
         {
-            if(!defined($key)){
-                define($key, $value);
-            }
+            $this->defineConstant($key, $value);
         }
     }
 
@@ -59,5 +57,12 @@ class KernelLoader
         }
 
         return '';
+    }
+
+    private function defineConstant(string $key, $value): void
+    {
+        if(!defined($key)){
+            define($key, $value);
+        }
     }
 }

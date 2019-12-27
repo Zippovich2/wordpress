@@ -1,10 +1,10 @@
 <?php
 
-use App\Kernel\KernelLoader;
+use App\WPLoader;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$kernelLoader = new KernelLoader();
+$kernelLoader = new WPLoader();
 $kernelLoader->load();
 
 $table_prefix = isset($_ENV['DB_PREFIX']) ? $_ENV['DB_PREFIX'] : 'wp_';
