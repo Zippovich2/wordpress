@@ -33,6 +33,18 @@ class WPLoader
         $this->defineConstant('WP_CONTENT_DIR', WEB_ROOT . $envVars['CONTENT_DIR']);
         $this->defineConstant('WP_CONTENT_URL', $envVars['WP_HOME'] . $envVars['CONTENT_DIR']);
         $this->defineConstant('ABSPATH', WEB_ROOT . '/wp/');
+
+        $this->logSettings();
+    }
+
+    private function logSettings(): void
+    {
+        $this->defineConstant('WP_DEBUG_DIR', PROJECT_ROOT . '/var/log');
+        $this->defineConstant('WP_DEBUG_LOG', WP_DEBUG_DIR . sprintf('/%s.log', APP_ENV));
+
+        if(!file_exists(WP_DEBUG_DIR)){
+            mkdir(WP_DEBUG_DIR);
+        }
     }
 
     private function defineConstants(array $vars): void
