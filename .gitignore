@@ -9,4 +9,5 @@ public/app/uploads/*
 vendor
 var
 
-.env*.local
+.env*
+!.env.example

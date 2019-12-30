@@ -44,5 +44,8 @@
         "psr-4": {
             "App\\": "src/"
         }
+    },
+    "scripts": {
+        "post-create-project-cmd": "cp .env.example .env && rm .env.example && touch .env.local"
     }
 }
