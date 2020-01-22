@@ -11,3 +11,5 @@ var
 
 .env*
 !.env.example
+
+composer.lock
