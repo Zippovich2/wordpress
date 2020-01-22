@@ -47,6 +47,6 @@
         }
     },
     "scripts": {
-        "post-create-project-cmd": "cp .env.example .env && rm .env.example && touch .env.local"
+        "post-create-project-cmd": "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
     }
 }
