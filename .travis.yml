@@ -1,0 +1,17 @@
+language: php
+
+services: docker
+
+php:
+  - '7.2'
+  - '7.3'
+  - '7.4'
+
+before_script:
+  - composer install --no-interaction --dev
+  - composer move-env-file
+  - docker-compose up
+  - docker-compose exec php-fpm vendor/bin/wp core install --url=localhost:8080 --title="Site Title" --admin_name=admin --admin_password=admin --admin_email=admin@example.com --path=/var/www/app/public/wp --allow-root --debug
+
+script:
+  - vendor/bin/phpunit --coverage-clover=coverage.xml

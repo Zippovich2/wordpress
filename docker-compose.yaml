@@ -22,8 +22,10 @@ services:
     depends_on:
       - mysql
     environment:
-      PHP_IDE_CONFIG: "serverName=Docker"
-      XDEBUG_CONFIG: "remote_host=host.docker.internal"
+      PHP_IDE_CONFIG: serverName=Docker
+      XDEBUG_CONFIG: remote_host=host.docker.internal
+      PROJECT_ROOT: /var/www/app
+      WEB_ROOT: /var/www/app/public
 
 
   mysql:
