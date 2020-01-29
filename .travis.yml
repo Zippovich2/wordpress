@@ -5,8 +5,9 @@ before_script:
   - composer move-env-file
   - docker-compose -f docker-compose-travis.yaml up -d
   - docker ps -a
+  - while ! docker-compose -f docker-compose-travis.yaml exec mysql mysqladmin ping -udev --password=dev; do sleep 1; done
   - sleep 15
   - docker-compose -f docker-compose-travis.yaml exec php-fpm vendor/bin/wp core install --url=localhost:8080 --title="Site Title" --admin_name=admin --admin_password=admin --admin_email=admin@example.com --path=/var/www/app/public/wp --allow-root --debug
 
 script:
-  - vendor/bin/phpunit --coverage-clover=coverage.xml
+  - vendor/bin/phpunit
