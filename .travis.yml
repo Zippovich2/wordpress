@@ -2,14 +2,7 @@ services: docker
 
 cache:
   directories:
-    - docker_images
     - $HOME/.composer/cache/files
-
-before_install:
-  - docker load -i docker_images/images.tar || true
-
-before_cache:
-  - docker save -o docker_images/images.tar $(docker images -a -q)
 
 before_script:
   - composer install --no-interaction
