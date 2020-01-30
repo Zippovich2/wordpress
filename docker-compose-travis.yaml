@@ -14,15 +14,14 @@ services:
 
 
   php-fpm:
-    build: ./.docker/php-fpm/
+    build: ./.docker/php-fpm-travis/
     working_dir: /var/www/app
     volumes:
       - ./:/var/www/app
+      - ./.docker/php-fpm/php.ini:/usr/local/etc/php/php.ini
     depends_on:
       - mysql
     environment:
-      PHP_IDE_CONFIG: serverName=Docker
-      XDEBUG_CONFIG: remote_host=host.docker.internal
       PROJECT_ROOT: /var/www/app
       WEB_ROOT: /var/www/app/public
 

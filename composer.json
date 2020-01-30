@@ -40,17 +40,38 @@
         "zippovich2/wordpress-loader": "^1.0"
     },
     "require-dev": {
-        "symfony/var-dumper": "^5.0"
+        "symfony/var-dumper": "^5.0",
+        "phpunit/phpunit": "^8.5",
+        "wp-cli/wp-cli-bundle": "^2.0",
+        "guzzlehttp/guzzle": "^6.5",
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "aaemnnosttv/wp-cli-dotenv-command": "^2.0"
     },
     "autoload": {
         "psr-4": {
             "App\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "WordpressWrapper\\Tests\\": "tests/"
+        }
+    },
     "conflict": {
-        "zippovich2/wordpress-config": "<1.1.1"
+        "zippovich2/wordpress-config": "<1.1.1",
+        "zippovich2/wordpress-loader": "<1.0.2"
     },
     "scripts": {
-        "post-create-project-cmd": "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        "move-env-file": "@php -r \"file_exists('.env') || rename('.env.example', '.env');\"",
+        "post-create-project-cmd": [
+            "@move-env-file",
+            "@salts",
+            "rm docker-compose-travis.yaml .travis.yml",
+            "rm -rf php-fpm-travis"
+        ],
+        "salts": "wp dotenv salts regenerate --file=.env --allow-root",
+        "cs-check": "php-cs-fixer fix --allow-risky=yes --diff --ansi --dry-run",
+        "cs-fix": "php-cs-fixer fix --allow-risky=yes --diff --ansi",
+        "tests": "phpunit --colors=always tests/"
     }
 }
