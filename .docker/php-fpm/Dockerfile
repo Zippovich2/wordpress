@@ -5,3 +5,4 @@ RUN docker-php-ext-install mysqli &&\
     docker-php-ext-enable xdebug
 
 COPY ./xdebug.ini $PHP_INI_DIR/conf.d/
+COPY ./php.ini $PHP_INI_DIR/conf.d/
