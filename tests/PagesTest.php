@@ -23,10 +23,8 @@ class PagesTest extends TestCase
 {
     private $httpClient;
 
-    public function __construct($name = null, array $data = [], $dataName = '')
+    public function setUp(): void
     {
-        parent::__construct($name, $data, $dataName);
-
         $this->httpClient = $client = new Client([
             'base_uri' => 'http://localhost:8080',
             'timeout' => 10,
