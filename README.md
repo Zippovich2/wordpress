@@ -1,6 +1,6 @@
 ## Wordpress Wrapper
 
-Developing Wordpress app in modern way.
+Developing Wordpress app in modern way using composer.
 
 [![Build Status](https://travis-ci.org/Zippovich2/wordpress.svg?branch=master)](https://travis-ci.org/Zippovich2/wordpress)
 [![Packagist](https://img.shields.io/packagist/v/zippovich2/wordpress.svg)](https://packagist.org/packages/zippovich2/wordpress)
