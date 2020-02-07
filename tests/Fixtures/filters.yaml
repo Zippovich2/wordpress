@@ -1,0 +1,5 @@
+filters:
+  the_title:
+    - { callback: CallbackFixtures::filter }
+
+callback_prefix: App\Tests\Fixtures\

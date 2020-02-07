@@ -1,0 +1,5 @@
+actions:
+  wp_body_open:
+    - { callback: CallbackFixtures::action }
+
+callback_prefix: App\Tests\Fixtures\

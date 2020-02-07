@@ -45,7 +45,9 @@
         "wp-cli/wp-cli-bundle": "^2.0",
         "guzzlehttp/guzzle": "^6.5",
         "friendsofphp/php-cs-fixer": "^2.16",
-        "aaemnnosttv/wp-cli-dotenv-command": "^2.0"
+        "aaemnnosttv/wp-cli-dotenv-command": "^2.0",
+        "symfony/dom-crawler": "^5.0",
+        "symfony/css-selector": "^5.0"
     },
     "autoload": {
         "psr-4": {
@@ -54,7 +56,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "WordpressWrapper\\Tests\\": "tests/"
+            "App\\Tests\\": "tests/"
         }
     },
     "conflict": {

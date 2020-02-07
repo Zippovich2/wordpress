@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace WordpressWrapper\Tests;
+namespace App\Tests;
 
 use GuzzleHttp\Client;
 use PHPUnit\Framework\TestCase;
@@ -23,10 +23,8 @@ class PagesTest extends TestCase
 {
     private $httpClient;
 
-    public function __construct($name = null, array $data = [], $dataName = '')
+    public function setUp(): void
     {
-        parent::__construct($name, $data, $dataName);
-
         $this->httpClient = $client = new Client([
             'base_uri' => 'http://localhost:8080',
             'timeout' => 10,
