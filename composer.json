@@ -36,7 +36,7 @@
         "php": "^7.2.5",
         "roots/wordpress": "^5.0",
         "symfony/dotenv": "^5.0",
-        "zippovich2/wordpress-config": "^1.0",
+        "zippovich2/wordpress-config": "^1.1",
         "zippovich2/wordpress-loader": "^1.0"
     },
     "require-dev": {
