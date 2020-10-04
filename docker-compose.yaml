@@ -25,6 +25,7 @@ services:
       XDEBUG_CONFIG: remote_host=host.docker.internal
       PROJECT_ROOT: /var/www/app
       WEB_ROOT: /var/www/app/public
+    user: "1000:1000"
 
 
   mysql:
