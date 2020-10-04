@@ -68,6 +68,7 @@
         "post-create-project-cmd": [
             "@move-env-file",
             "@salts",
+            "mkdir -p ./var/log",
             "rm docker-compose-travis.yaml .travis.yml",
             "rm -rf ./.docker/php-fpm-travis"
         ],
