@@ -13,6 +13,8 @@ cache:
 before_script:
   - composer install --no-interaction
   - composer move-env-file
+  - composer move-const-file
+  - composer salts
   - docker-compose -f docker-compose-travis.yaml up -d
   - docker ps -a
   - while ! docker-compose -f docker-compose-travis.yaml exec mysql mysqladmin ping -udev --password=dev; do sleep 1; done
