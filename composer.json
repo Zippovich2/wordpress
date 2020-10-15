@@ -70,11 +70,13 @@
             "@move-env-file",
             "@move-const-file",
             "@salts",
+            "@activate-theme",
             "mkdir -p ./var/log",
             "rm docker-compose-travis.yaml .travis.yml",
             "rm -rf ./.docker/php-fpm-travis"
         ],
-        "salts": "wp dotenv salts regenerate --file=.const --allow-root",
+        "salts": "wp dotenv salts regenerate --file=.const",
+        "activate-theme": "wp theme activate wordpress-wrapper --path=/var/www/app/public/wp",
         "cs-check": "php-cs-fixer fix --allow-risky=yes --diff --ansi --dry-run",
         "cs-fix": "php-cs-fixer fix --allow-risky=yes --diff --ansi",
         "tests": "phpunit --colors=always tests/"
