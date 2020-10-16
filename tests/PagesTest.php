@@ -25,11 +25,16 @@ class PagesTest extends TestCase
 
     public function setUp(): void
     {
-        $this->httpClient = $client = new Client([
+        $this->httpClient = new Client([
             'base_uri' => 'http://localhost:8080',
             'timeout' => 10,
             'allow_redirects' => false,
         ]);
+    }
+
+    public function tearDown(): void
+    {
+        $this->httpClient = null;
     }
 
     /**
