@@ -40,28 +40,13 @@ class PagesTest extends TestCase
         $this->httpClient = null;
     }
 
-    private function createGetRequest(string $path): int
-    {
-        $ch = \curl_init();
-        \curl_setopt($ch, CURLOPT_URL, $_ENV['APP_HTTP_HOST'] . $path);
-        \curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        \curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false);
-        \curl_exec($ch);
-        $responseCode = \curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
-        \curl_close($ch);
-
-        return $responseCode;
-    }
-
     /**
      * @dataProvider pageStatusCodeProvider
      */
     public function testStatusCode($page, $expectedStatusCode): void
     {
         $response = $this->httpClient->request('GET', $page);
-        $code = $this->createGetRequest($page);
 
-        static::assertEquals($expectedStatusCode, $code);
         static::assertEquals($expectedStatusCode, $response->getStatusCode());
     }
 
