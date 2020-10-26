@@ -32,6 +32,19 @@ class PagesTest extends TestCase
         ]);
     }
 
+    private function createGetRequest(string $path): int
+    {
+        $ch = \curl_init();
+        \curl_setopt($ch, CURLOPT_URL, sprintf('http://localhost:8080%s', $path));
+        \curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        \curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false);
+        \curl_exec($ch);
+        $responseCode = \curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+        \curl_close($ch);
+
+        return $responseCode;
+    }
+
     public function tearDown(): void
     {
         $this->httpClient = null;
@@ -43,8 +56,10 @@ class PagesTest extends TestCase
     public function testStatusCode($page, $expectedStatusCode): void
     {
         $response = $this->httpClient->request('GET', $page);
+        $code = $this->createGetRequest($page);
 
         static::assertEquals($expectedStatusCode, $response->getStatusCode());
+        static::assertEquals($expectedStatusCode, $code);
     }
 
     public function pageStatusCodeProvider()
