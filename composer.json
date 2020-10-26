@@ -44,11 +44,11 @@
         "symfony/var-dumper": "^5.0",
         "phpunit/phpunit": "^9.0",
         "wp-cli/wp-cli-bundle": "^2.3",
-        "guzzlehttp/guzzle": "^6.5",
         "friendsofphp/php-cs-fixer": "^2.16",
         "aaemnnosttv/wp-cli-dotenv-command": "^2.0",
         "symfony/dom-crawler": "^5.0",
-        "symfony/css-selector": "^5.0"
+        "symfony/css-selector": "^5.0",
+        "symfony/http-client": "^5.1"
     },
     "autoload": {
         "psr-4": {

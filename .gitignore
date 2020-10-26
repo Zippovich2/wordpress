@@ -13,6 +13,10 @@ var
 .env.*.local
 !.env.example
 
+.const.local
+.const.*.local
+!.const.example
+
 composer.lock
 .php_cs.cache
 .phpunit.result.cache

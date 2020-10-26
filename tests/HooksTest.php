@@ -14,9 +14,10 @@ declare(strict_types=1);
 namespace App\Tests;
 
 use App\Tests\Fixtures\CallbackFixtures;
-use GuzzleHttp\Client;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DomCrawler\Crawler;
+use Symfony\Component\HttpClient\HttpClient;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 final class HooksTest extends TestCase
 {
@@ -25,6 +26,9 @@ final class HooksTest extends TestCase
         'actions.yaml',
     ];
 
+    /**
+     * @var HttpClientInterface|null
+     */
     private $httpClient;
 
     public function setUp(): void
@@ -33,33 +37,10 @@ final class HooksTest extends TestCase
             \copy(__DIR__ . \sprintf('/Fixtures/%s', $config), __DIR__ . \sprintf('/../config/%s', $config));
         }
 
-        $this->httpClient = $client = new Client([
-            'base_uri' => 'http://localhost:8080',
-            'timeout' => 10,
-            'allow_redirects' => false,
+        $this->httpClient = HttpClient::create([
+            'base_uri' => $_ENV['APP_HTTP_HOST'],
+            'max_redirects' => 0,
         ]);
-    }
-
-    public function testFilter(): void
-    {
-        $response = $this->httpClient->request('GET', '/');
-        $crawler = new Crawler($response->getBody()->getContents());
-
-        $filterElement = $crawler->filter('#filter-test-id');
-
-        static::assertGreaterThan(0, \count($filterElement));
-        static::assertEquals(CallbackFixtures::FILTER_TEXT, $filterElement->eq(0)->text());
-    }
-
-    public function testHook(): void
-    {
-        $response = $this->httpClient->request('GET', '/');
-        $crawler = new Crawler($response->getBody()->getContents());
-
-        $actionElement = $crawler->filter('#action-test-id');
-
-        static::assertGreaterThan(0, \count($actionElement));
-        static::assertEquals(CallbackFixtures::ACTION_TEXT, $actionElement->eq(0)->text());
     }
 
     public function tearDown(): void
@@ -71,5 +52,29 @@ final class HooksTest extends TestCase
                 \unlink($path);
             }
         }
+
+        $this->httpClient = null;
+    }
+
+    public function testFilter(): void
+    {
+        $response = $this->httpClient->request('GET', '/');
+        $crawler = new Crawler($response->getContent(false));
+
+        $filterElement = $crawler->filter('#filter-test-id');
+
+        static::assertGreaterThan(0, \count($filterElement));
+        static::assertEquals(CallbackFixtures::FILTER_TEXT, $filterElement->eq(0)->text());
+    }
+
+    public function testHook(): void
+    {
+        $response = $this->httpClient->request('GET', '/');
+        $crawler = new Crawler($response->getContent(false));
+
+        $actionElement = $crawler->filter('#action-test-id');
+
+        static::assertGreaterThan(0, \count($actionElement));
+        static::assertEquals(CallbackFixtures::ACTION_TEXT, $actionElement->eq(0)->text());
     }
 }

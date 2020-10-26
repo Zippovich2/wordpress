@@ -13,26 +13,29 @@ declare(strict_types=1);
 
 namespace App\Tests;
 
-use GuzzleHttp\Client;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpClient\HttpClient;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 /**
  * @author Roman Skoropadskyi <zipo.ckorop@gmail.com>
  */
 class PagesTest extends TestCase
 {
+    /**
+     * @var HttpClientInterface|null
+     */
     private $httpClient;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
-        $this->httpClient = new Client([
+        $this->httpClient = HttpClient::create([
             'base_uri' => $_ENV['APP_HTTP_HOST'],
-            'timeout' => 60,
-            'allow_redirects' => false,
+            'max_redirects' => 0,
         ]);
     }
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         $this->httpClient = null;
     }
@@ -53,24 +56,22 @@ class PagesTest extends TestCase
     /**
      * @dataProvider pageStatusCodeProvider
      */
-    public function testStatusCode($page, $expectedStatusCode, $expectedLocation): void
+    public function testStatusCode($page, $expectedStatusCode): void
     {
-        $response = $this->httpClient->request('GET', $page, ['allow_redirects' => false]);
+        $response = $this->httpClient->request('GET', $page);
         $code = $this->createGetRequest($page);
-        $location = $response->getHeaderLine('Location');
 
-        static::assertEquals($expectedLocation, $location);
-        static::assertEquals($expectedStatusCode, $response->getStatusCode());
         static::assertEquals($expectedStatusCode, $code);
+        static::assertEquals($expectedStatusCode, $response->getStatusCode());
     }
 
     public function pageStatusCodeProvider()
     {
         return [
-            ['/', 200, ''],
-            ['/wp/wp-login.php', 200, ''],
-            ['/wp/', 301,  $_ENV['APP_HTTP_HOST'] . '/wp/wp-admin/'],
-            ['/wp/wp-admin/', 302, $_ENV['APP_HTTP_HOST'] . '/wp/wp-login.php?redirect_to=http%3A%2F%2Flocalhost%3A8080%2Fwp%2Fwp-admin%2F&reauth=1'],
+            ['/', 200],
+            ['/wp/wp-login.php', 200],
+            ['/wp/', 301],
+            ['/wp/wp-admin/', 302],
         ];
     }
 }

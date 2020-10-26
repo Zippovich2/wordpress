@@ -12,6 +12,8 @@ services:
       - 8080:80
     depends_on:
       - php-fpm
+    networks:
+      - wordpress
 
 
   php-fpm:
@@ -23,11 +25,13 @@ services:
     depends_on:
       - mysql
     environment:
-      PHP_IDE_CONFIG: serverName=Docker
-      XDEBUG_CONFIG: remote_host=host.docker.internal
+      PHP_IDE_CONFIG: serverName=Wordpress
+      XDEBUG_CONFIG: remote_host=192.168.220.1
       PROJECT_ROOT: /var/www/app
       WEB_ROOT: /var/www/app/public
     user: "1000:1000"
+    networks:
+      - wordpress
 
 
   mysql:
@@ -43,3 +47,13 @@ services:
       MYSQL_USER: dev
       MYSQL_PASSWORD: dev
       MYSQL_ROOT_PASSWORD: root
+    networks:
+      - wordpress
+
+networks:
+  wordpress:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.220.0/28

@@ -17,6 +17,20 @@ $finder = \PhpCsFixer\Finder::create()
         '*.php',
         'console',
     ])
+    ->in([
+        'public',
+    ])
+    ->exclude([
+        'app',
+        'wp',
+    ])
+    ->notPath([
+        'index.php'
+    ])
+    ->name([
+        '*.php',
+    ])
+
 ;
 
 return \PhpCsFixer\Config::create()
