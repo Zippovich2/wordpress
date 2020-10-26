@@ -15,5 +15,11 @@ stop: ## Stops HTTP server
 salts: ## Generating WordPress salts
 	docker-compose exec php-fpm vendor/bin/wp dotenv salts regenerate --file=.env --allow-root
 
-test: ## Running tests
+tests: ## Running tests
 	vendor/bin/phpunit --colors=always tests/
+
+cs-fix: ## CS fix
+	docker-compose exec php-fpm vendor/bin/php-cs-fixer fix --allow-risky=yes --diff --ansi
+
+cs-check: ## CS check
+	docker-compose exec php-fpm vendor/bin/php-cs-fixer fix --allow-risky=yes --diff --ansi --dry-run

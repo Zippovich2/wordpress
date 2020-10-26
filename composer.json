@@ -40,7 +40,6 @@
         "zippovich2/wordpress-loader": "^1.1"
     },
     "require-dev": {
-        "ext-curl": "*",
         "symfony/var-dumper": "^5.0",
         "phpunit/phpunit": "^9.0",
         "wp-cli/wp-cli-bundle": "^2.3",

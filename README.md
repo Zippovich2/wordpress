@@ -32,7 +32,8 @@ or
     ```
 2. Update variables in the `.env` files and constants in the`.const` files (you can use `.env`, `.env.local`, `.env.dev`,
     `.env.dev.local` and `.const`, `.const.local`, `.const.dev`, `.const.dev.local` files depends on your `APP_ENV`):
-    * `APP_ENV` - Set to environment (`dev`, `prod` or `test`)
+    * `APP_ENV` - set to environment (`dev`, `prod` or `test`).
+    * `DB_TABLE_PREFIX` - use this environment variable to change database table prefix, default is `wp_`.
     * Database constants:
         * `DB_NAME` - database name.
         * `DB_USER` - database user.
