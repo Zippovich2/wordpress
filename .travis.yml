@@ -11,6 +11,7 @@ cache:
     - $HOME/.composer/cache/files
 
 before_script:
+  - mkdir var/log -p
   - composer install --no-interaction
   - composer move-env-file
   - composer move-const-file
@@ -23,5 +24,4 @@ before_script:
   - docker-compose -f docker-compose-travis.yaml exec php-fpm vendor/bin/wp theme activate wordpress-wrapper --path=/var/www/app/public/wp
 
 script:
-  - curl http://localhost:8080/wp/wp-admin/ -v
   - vendor/bin/phpunit
