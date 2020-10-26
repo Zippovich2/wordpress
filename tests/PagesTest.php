@@ -47,6 +47,9 @@ class PagesTest extends TestCase
     {
         $response = $this->httpClient->request('GET', $page);
 
+        print_r($response->getContent(false));
+        print_r(PHP_EOL . '----------------------------------------' . PHP_EOL);
+
         static::assertEquals($expectedStatusCode, $response->getStatusCode());
     }
 

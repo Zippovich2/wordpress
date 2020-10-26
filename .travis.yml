@@ -23,4 +23,5 @@ before_script:
   - docker-compose -f docker-compose-travis.yaml exec php-fpm vendor/bin/wp theme activate wordpress-wrapper --path=/var/www/app/public/wp
 
 script:
+  - curl http://localhost:8080/wp/wp-admin/ -v
   - vendor/bin/phpunit

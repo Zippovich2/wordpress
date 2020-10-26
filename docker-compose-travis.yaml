@@ -20,7 +20,6 @@ services:
     restart: unless-stopped
     volumes:
       - ./:/var/www/app
-      - ./.docker/php-fpm/php.ini:/usr/local/etc/php/php.ini
     depends_on:
       - mysql
     environment:
