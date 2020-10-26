@@ -27,7 +27,7 @@ class PagesTest extends TestCase
     {
         $this->httpClient = new Client([
             'base_uri' => $_ENV['APP_HTTP_HOST'],
-            'timeout' => 10,
+            'timeout' => 60,
             'allow_redirects' => false,
         ]);
     }
@@ -55,13 +55,13 @@ class PagesTest extends TestCase
      */
     public function testStatusCode($page, $expectedStatusCode, $expectedLocation): void
     {
-        $response = $this->httpClient->request('GET', $page);
+        $response = $this->httpClient->request('GET', $page, ['allow_redirects' => false]);
         $code = $this->createGetRequest($page);
         $location = $response->getHeaderLine('Location');
 
+        static::assertEquals($expectedLocation, $location);
         static::assertEquals($expectedStatusCode, $response->getStatusCode());
         static::assertEquals($expectedStatusCode, $code);
-        static::assertEquals($expectedLocation, $location);
     }
 
     public function pageStatusCodeProvider()
