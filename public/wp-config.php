@@ -2,15 +2,6 @@
 
 declare(strict_types=1);
 
-/*
- * This file is part of the "Wordpress Wrapper" package.
- *
- * (c) Skoropadskyi Roman <zipo.ckorop@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 use WordpressWrapper\Loader\Loader;
 
 require_once __DIR__ . '/../vendor/autoload.php';
