@@ -1,4 +1,5 @@
 <?php
+
 /*
 Plugin Name: Register Theme Directory
 Version:     1.3.0
