@@ -1,0 +1,40 @@
+#-- START -- Main Settings --#
+# Database config
+DB_NAME=wordpress
+DB_USER=dev
+DB_PASSWORD=dev
+DB_HOST=mysql:3306
+
+# Url and paths settings
+WP_HOME=http://localhost:8080
+WP_SITEURL=${WP_HOME}/wp
+CONTENT_DIR=/app
+
+# Salts
+AUTH_KEY='put your unique phrase here'
+SECURE_AUTH_KEY='put your unique phrase here'
+LOGGED_IN_KEY='put your unique phrase here'
+NONCE_KEY='put your unique phrase here'
+AUTH_SALT='put your unique phrase here'
+SECURE_AUTH_SALT='put your unique phrase here'
+LOGGED_IN_SALT='put your unique phrase here'
+NONCE_SALT='put your unique phrase here'
+#-- END -- Main Settings --#
+
+#-- START -- Additional Settings --#
+# Enable debug and prevent errors printing
+WP_DEBUG=true
+WP_DEBUG_DISPLAY=false
+
+# Disable automatic updates of plugins, core, and themes
+AUTOMATIC_UPDATER_DISABLED=true
+
+# Disable wp cron
+DISABLE_WP_CRON=false
+
+# Disable file editiong from /wp-admin
+DISALLOW_FILE_EDIT=true
+
+# Disable plugins update and installation from /wp-admin
+DISALLOW_FILE_MODS=true
+#-- END -- Additional Settings --#

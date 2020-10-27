@@ -23,3 +23,15 @@ RUN pecl install exif zip && \
 
 COPY ./xdebug.ini $PHP_INI_DIR/conf.d/
 COPY ./php.ini $PHP_INI_DIR/conf.d/
+
+# Composer Install
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
+    php composer-setup.php -- --install-dir=/usr/local/bin --filename=composer && \
+    php -r "unlink('composer-setup.php');"
+
+# Create php-user
+RUN useradd -m php-user -G www-data
+
+WORKDIR /var/www/app
+
+USER php-user

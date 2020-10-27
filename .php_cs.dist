@@ -1,4 +1,10 @@
 <?php
+
+declare(strict_types=1);
+
+use PhpCsFixer\Config;
+use PhpCsFixer\Finder;
+
 $header = <<<HEADER
 This file is part of the "Wordpress Wrapper" package.
 
@@ -8,7 +14,7 @@ For the full copyright and license information, please view the LICENSE
 file that was distributed with this source code.
 HEADER;
 
-$finder = \PhpCsFixer\Finder::create()
+$finder = Finder::create()
     ->in([
         'src',
         'tests',
@@ -19,7 +25,7 @@ $finder = \PhpCsFixer\Finder::create()
     ])
 ;
 
-return \PhpCsFixer\Config::create()
+return Config::create()
     ->setCacheFile(__DIR__ . '/.php_cs.cache')
     ->setFinder($finder)
     ->setRules([

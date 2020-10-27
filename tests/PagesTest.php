@@ -13,23 +13,31 @@ declare(strict_types=1);
 
 namespace App\Tests;
 
-use GuzzleHttp\Client;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpClient\HttpClient;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 /**
  * @author Roman Skoropadskyi <zipo.ckorop@gmail.com>
  */
 class PagesTest extends TestCase
 {
+    /**
+     * @var HttpClientInterface|null
+     */
     private $httpClient;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
-        $this->httpClient = $client = new Client([
-            'base_uri' => 'http://localhost:8080',
-            'timeout' => 10,
-            'allow_redirects' => false,
+        $this->httpClient = HttpClient::create([
+            'base_uri' => $_ENV['APP_HTTP_HOST'],
+            'max_redirects' => 0,
         ]);
+    }
+
+    protected function tearDown(): void
+    {
+        $this->httpClient = null;
     }
 
     /**
